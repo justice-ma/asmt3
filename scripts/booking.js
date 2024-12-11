@@ -21,8 +21,12 @@ function updateTotalCost() {
     let costPerSelectedDay;
     if (selectedDayType === 'full') {
         costPerSelectedDay = costPerDay;
+        fullButton.classList.add('clicked')
+        halfButton.classList.remove('clicked')
     } else if (selectedDayType === 'half') {
         costPerSelectedDay = halfDayCost;
+        fullButton.classList.remove('clicked')
+        halfButton.classList.add('clicked')
     } else {
         costPerSelectedDay = 0;
     }
@@ -31,7 +35,7 @@ function updateTotalCost() {
     costDisplay.textContent = calculatedCost;
 }
 
-daySelectors.forEach(day =>{
+daySelectors.forEach(day => {
     day.addEventListener('click', () => {
         if (day.classList.contains('clicked')) {
             day.classList.remove('clicked')
@@ -59,27 +63,21 @@ clearDays.addEventListener('click', () => {
 /********* change rate *********/
 // when the half-day button is clicked, set the daily rate to $20, add the "clicked" class to the "half" element, remove it from the "full" element, and recalculate the total cost.
 
-document.getElementById('full').addEventListener('click', () => {
-    selectedDayType = 'full';
-    updateTotalCost();
-    fullButton.classList.add('clicked')
-    halfButton.classList.remove('clicked')
-});
-
 document.getElementById('half').addEventListener('click', () => {
     selectedDayType = 'half';
     updateTotalCost();
-    fullButton.classList.remove('clicked')
-    halfButton.classList.add('clicked')
 })
 
 // when the full-day button is clicked, the daily rate is set back to $35, the clicked class is added to "full" and removed from "half", and the total cost is recalculated.
 
-
+document.getElementById('full').addEventListener('click', () => {
+    selectedDayType = 'full';
+    updateTotalCost();
+});
 
 
 
 /********* calculate *********/
 // when a calculation is needed, set the innerHTML of the calculated-cost element to the appropriate value
 
-
+//see line 35
